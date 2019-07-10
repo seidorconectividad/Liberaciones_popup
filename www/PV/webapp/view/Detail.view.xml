@@ -1,0 +1,137 @@
+<mvc:View
+		controllerName="com.prodac.libpedven.masterdetail.controller.Detail"
+		xmlns="sap.m"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:f="sap.ui.layout.form"
+		xmlns:c="sap.ui.core"
+		xmlns:t="sap.ui.table"
+		xmlns:semantic="sap.m.semantic">
+
+	<semantic:DetailPage
+			id="page"
+			navButtonPress="onNavBack"
+			showNavButton="{device>/system/phone}"
+			title="{i18n>detailTitle}">
+
+		<semantic:content>
+
+			<!-- Cabecera principal -->
+			<!--
+			<ObjectHeader
+					id="objectHeader"
+					class="sapUiSmallMargin"
+					title="Número documento {NUMLIB}"
+					visible="{midata>/detallesVisible}"
+					number="{
+						parts: ['IMPORTE','MONEDA'], formatter: '.formatter.printMontoImporteMoneda'
+					}"
+					numberUnit="Monto total (sin IGV)"
+					>
+				<attributes>
+					<ObjectAttribute text= "Fecha creación : { path: 'FECHA', formatter: '.formatter.mostrarFechaSAP' }" />
+				</attributes>
+			</ObjectHeader>
+		  -->
+			<Text id="ID_LIB" text="{ID}" visible="false"/>
+
+			<Select visible="false" items="{/Clasifx}" selectedKey="{midata>/id}" >
+				<c:Item key="{CODIGO}" text="{DESCRIPCION}"/>
+			</Select>
+
+			<!-- Cabecera detallada -->
+	        <f:SimpleForm maxContainerCols="2" editable="false" layout="ResponsiveGridLayout" class="editableForm"
+	        		adjustLabelSpan="false"
+	        		breakpointL="300"
+	        		breakpointM="300"
+	        		breakpointXL="300"
+			        labelSpanL="5"
+					labelSpanM="5"
+					emptySpanL="0"
+					emptySpanM="0"
+					columnsL="1"
+					columnsM="1"
+	        	>
+                <f:content>
+										<Label text="Número documento" />
+										<Text text="{NUMLIB}"  class="sapTextBlue" />
+										<Label text="Vendedor" />
+                    <Text text="{PROVEEDOR_NOM}" />
+	                	<Label text="Referencia" />
+	                	<Text text="{CONCEPTO}" />
+										<Label text="Monto total(sin IGV)" />
+	                	<Text text="{ parts: ['IMPORTE','MONEDA'], formatter: '.formatter.printMontoImporteMoneda' }" />
+                    <Label text="Cliente"/>
+	                	<Text text="{SOLICITANTE_USER}" />
+	                	<Label text="Estado"/>
+	                	<Text text="{MOTIVO_SAP}" />
+										<Label text="Condición de pago"/>
+	                	<Text text="{COND_PAGO}" />
+										<Label text="Fecha creación"/>
+	                	<Text text="{ path: 'FECHA', formatter: '.formatter.mostrarFechaSAP' }" />
+				</f:content>
+            </f:SimpleForm>
+
+				        		<t:Table
+				        			id="lineItemsList"
+									rows="{LibMM_Posiciones}"
+									selectionMode="Single"
+									selectionBehavior="RowOnly"
+									enableColumnReordering="false"
+									updateFinished="onListUpdateFinished"
+									noDataText="{i18n>detailLineItemTableNoDataText}"
+									busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+									visibleRowCount="5">
+									<t:columns>
+										<t:Column width="7rem" hAlign="Center" >
+											<Label text="Pos" />
+											<t:template>
+												<Text text="{POSICION}" />
+											</t:template>
+										</t:Column>
+										<t:Column width="18rem" hAlign="Left" >
+											<Label text="Artículo" />
+											<t:template>
+												<Text text="{ARTICULO}" />
+											</t:template>
+										</t:Column>
+										<t:Column width="7rem" hAlign="Right">
+											<Label text="P.Unit" />
+											<t:template>
+												<Text text="{ parts: ['PUNIT'], formatter: '.formatter.printMontoImporte4' }"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="7rem" hAlign="Right">
+											<Label text="Cantidad" />
+											<t:template>
+												<Text text="{ parts: ['CANTIDAD','UNIMED'], formatter: '.formatter.printMontoImporteMoneda'}"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="9rem" hAlign="Right">
+											<Label text="Descuento" />
+											<t:template>
+												<Text text="{ parts: ['DESCUENTO'], formatter: '.formatter.printMontoImporte4' }" />
+											</t:template>
+										</t:Column>
+										<t:Column width="9rem" hAlign="Right">
+											<Label text="Subtotal" />
+											<t:template>
+												<Text text="{ parts: ['SUBTOTAL'], formatter: '.formatter.printMontoImporte4' }" />
+											</t:template>
+										</t:Column>
+									</t:columns>
+								</t:Table>
+
+
+		</semantic:content>
+
+		<semantic:negativeAction>
+			<!-- <semantic:NegativeAction text="Desaprobar" press="onDesaprobar" type="Reject" visible="{midata>/boton_desaprobar}"/> -->
+			<semantic:NegativeAction text="Desaprobar" visible="{midata>/detallesVisible}" press="onDesaprobarDialog" type="Reject" />
+		</semantic:negativeAction>
+		<semantic:positiveAction>
+			<!-- <semantic:PositiveAction text="Aprobar" press="onAprobar" type="Accept" visible="{midata>/boton_aprobar}"/> -->
+			<semantic:PositiveAction text="Aprobar" visible="{midata>/detallesVisible}" press="onAprobarDialog" type="Accept" />
+		</semantic:positiveAction>
+	</semantic:DetailPage>
+
+</mvc:View>

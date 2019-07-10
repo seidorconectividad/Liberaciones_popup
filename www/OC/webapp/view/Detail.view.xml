@@ -1,0 +1,253 @@
+<mvc:View
+		controllerName="com.prodac.liboc.masterdetail.controller.Detail"
+		xmlns="sap.m"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:f="sap.ui.layout.form"
+		xmlns:c="sap.ui.core"
+		xmlns:t="sap.ui.table"
+		xmlns:l="sap.ui.layout"
+		xmlns:semantic="sap.m.semantic">
+
+	<semantic:DetailPage
+			id="page"
+			navButtonPress="onNavBack"
+			showNavButton="{device>/system/phone}"
+			title="{i18n>detailTitle}">
+
+		<semantic:content>
+
+			<!-- Cabecera principal -->
+			<!--
+			<ObjectHeader
+					id="objectHeader"
+					class="sapUiSmallMargin"
+					title="Orden de compra {NUMLIB}" >
+					number="{
+						parts: ['IMPORTE','MONEDA'], formatter: '.formatter.printMontoImporteMoneda'
+					}"
+					numberUnit="Monto total (sin IGV)"
+					>
+				<firstStatus>
+					<ObjectStatus text="{ path: 'FECHA', formatter: '.formatter.mostrarFechaSAP' }" />
+				</firstStatus>
+				<attributes>
+					<ObjectAttribute text= "Fecha creación : { path: 'FECHA', formatter: '.formatter.mostrarFechaSAP' }" />
+				</attributes>
+			</ObjectHeader>
+			-->
+			<Text id="ID_LIB" text="{ID}" visible="false"/>
+
+		    <Select visible="false" items="{/Clasifx}" selectedKey="{midata>/id}" >
+				<c:Item key="{CODIGO}" text="{DESCRIPCION}"/>
+			</Select>
+
+			<!-- Cabecera detallada -->
+	        <f:SimpleForm maxContainerCols="2" editable="false" layout="ResponsiveGridLayout" class="editableForm"
+	        		adjustLabelSpan="false"
+	        		breakpointL="300"
+	        		breakpointM="300"
+	        		breakpointXL="300"
+			        labelSpanL="5"
+					labelSpanM="5"
+					emptySpanL="0"
+					emptySpanM="0"
+					columnsL="1"
+					columnsM="1"
+	        	>
+                <f:content>
+									<Label text="Orden de compra" />
+									<Text text="{NUMLIB}"  class="sapTextBlue" />
+									<Label text="Usuario Solicitante" />
+                  <Text text="{SOLICITANTE_USER}" />
+	                <Label text="Concepto" />
+	                <Text text="{CONCEPTO}" class="sapTextRed" />
+									<Label text="Monto total(sin IGV)" />
+                  <Text text="{	parts: ['IMPORTE','MONEDA'], formatter: '.formatter.printMontoImporteMoneda' }" />
+	                <Label text="Comprador" />
+                  <Text text="{COMPRADOR}" />
+                  <Label text="Proveedor"/>
+	                <Text text="{PROVEEDOR_COD}" />
+	                <Label text=" "/>
+	                <Text text="{PROVEEDOR_NOM}" />
+									<Label text="Prioridad"/>
+	                <Text text="{PRIORIDAD}" />
+									<Label text="Ultimo aprobador" />
+	                <Text text="{ULTIMO_APROB}" />
+									<Label text="Fecha creación" />
+	                <Text text="{ path: 'FECHA', formatter: '.formatter.mostrarFechaSAP' }" />
+				</f:content>
+                <f:content>
+                	<c:Title text="Datos adicionales" />
+										<Label text="Fecha entrega" />
+	                  <Text text="{FECHA_ENT}" />
+		                <Label text="Dpto Solicitante" />
+		                <Text text="{SOLICITANTE_AREA}" />
+		                <Label text="Tipo de O/C" />
+	                  <Text text="{TIPO_ORDEN}" />
+	                  <Label text="Condición Pago"/>
+		                <Text text="{COND_PAGO}" />
+				</f:content>
+            </f:SimpleForm>
+
+			<!--
+			<IconTabBar	id="TabBar" class="sapUiResponsiveContentPadding" expandable="false" select="onSelectTabBarChanged">
+				<items>
+
+
+					<IconTabFilter
+							id="TabDetalles"
+							key="Detalles"
+							icon="sap-icon://form"
+							text="Posiciones">
+			-->
+
+					<!-- ************ Tabla de detalles ************** -->
+
+				        		<t:Table
+				        			id="lineItemsList"
+									rows="{LibMM_Posiciones}"
+									selectionMode="Single"
+									selectionBehavior="RowOnly"
+									enableColumnReordering="false"
+									updateFinished="onListUpdateFinished"
+									noDataText="{i18n>detailLineItemTableNoDataText}"
+									busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+									visibleRowCount="5">
+									<t:columns>
+										<t:Column width="7rem" hAlign="Center" >
+											<Label text="Pos" />
+											<t:template>
+												<Text text="{POSICION}" />
+											</t:template>
+										</t:Column>
+										<t:Column width="18rem" hAlign="Left" >
+											<Label text="Artículo" />
+											<t:template>
+												<Text text="{ARTICULO}" />
+											</t:template>
+										</t:Column>
+										<t:Column width="5rem" hAlign="Center" >
+											<Label text="Unidad" />
+											<t:template>
+												<Text text="{UNIMED}" />
+											</t:template>
+										</t:Column>
+										<t:Column width="7rem" hAlign="Right">
+											<Label text="P.Unit" />
+											<t:template>
+												<Text text="{ parts: ['PUNIT'], formatter: '.formatter.printMontoImporte4' }"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="7rem" hAlign="Right">
+											<Label text="Cantidad" />
+											<t:template>
+												<Text text="{ parts: ['CANTIDAD'], formatter: '.formatter.printMontoImporte4'}"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="9rem" hAlign="Right">
+											<Label text="Subtotal" />
+											<t:template>
+												<Text text="{ parts: ['SUBTOTAL'], formatter: '.formatter.printMontoImporte4' }" />
+											</t:template>
+										</t:Column>
+										<t:Column width="12rem" hAlign="Left">
+											<Label text="Almacén" />
+											<t:template>
+												<Text text="{ALMACEN}"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="7rem" hAlign="Center">
+											<Label text="Fecha entrega" />
+											<t:template>
+												<Text text="{FECHA_ENT}"/>
+
+											</t:template>
+										</t:Column>
+										<t:Column width="12rem" hAlign="Left">
+											<Label text="Centro costo" />
+											<t:template>
+												<Text text="{CCOSTO}"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="8rem" hAlign="Left">
+											<Label text="Cód.Activo" />
+											<t:template>
+												<Text text="{ACTIVO_COD}"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="8rem" hAlign="Left">
+											<Label text="Orden Mant" />
+											<t:template>
+												<Text text="{ORDEN_MANT}"/>
+											</t:template>
+										</t:Column>
+
+									</t:columns>
+								</t:Table>
+
+			<!--
+					</IconTabFilter>
+			-->
+
+
+					<!-- Pantalla aprobación -->
+					<!--
+					<IconTabFilter
+						id="Aprobar"
+						key="Aprobar"
+						icon="sap-icon://accept"
+						text="Aprobación">
+
+						<VBox class="sapUiSmallMargin">
+							<Label text="Comentario" />
+							<TextArea width="100%" value="{midata>/comentario}" />
+						</VBox>
+
+					</IconTabFilter>
+					-->
+
+
+					<!-- Pantalla desaprobación -->
+					<!--
+					<IconTabFilter
+							id="TabDesaprobar"
+							key="Desaprobar"
+							icon="sap-icon://decline"
+							text="Desaprobación">
+
+						<VBox class="sapUiSmallMargin">
+							<Label text="Motivo"/>
+							<Select width="100%" selectedKey="{midata>/motivo}"
+								items="{
+		                    		path: '/Clasifx',
+		                    		filters: [ { path: 'TABLA', operator: 'EQ', value1: 'MOTIVOS_OC' } ]
+		                    	}">
+								<c:Item key="{CODIGO}" text="{DESCRIPCION}"/>
+								<layoutData>
+									<l:GridData span="L8 M6 S12" />
+								</layoutData>
+							</Select>
+						</VBox>
+
+					</IconTabFilter>
+					-->
+
+			<!--
+				</items>
+			</IconTabBar>
+			-->
+
+
+		</semantic:content>
+
+		<semantic:negativeAction>
+			<!-- <semantic:NegativeAction text="Desaprobar" press="onDesaprobar" type="Reject" visible="{midata>/boton_desaprobar}"/> -->
+			<semantic:NegativeAction text="Desaprobar" visible="{midata>/detallesVisible}" press="onDesaprobarDialog" type="Reject" />
+		</semantic:negativeAction>
+		<semantic:positiveAction>
+			<!-- <semantic:PositiveAction text="Aprobar" press="onAprobar" type="Accept" visible="{midata>/boton_aprobar}"/> -->
+			<semantic:PositiveAction text="Aprobar" visible="{midata>/detallesVisible}" press="onAprobarDialog" type="Accept" />
+		</semantic:positiveAction>
+	</semantic:DetailPage>
+
+</mvc:View>

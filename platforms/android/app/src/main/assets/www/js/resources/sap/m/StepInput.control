@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<control xmlns="http://www.sap.com/sap.ui.library.xsd">
+    <name>StepInput</name>
+    <derived/>
+    <author>SAP SE</author>
+    <documentation>The &lt;code&gt;StepInput&lt;/code&gt; control allows the user to change the input values with predefined increments (steps).</documentation>
+    <since>1.40</since>
+    <baseType>sap.ui.core/Control</baseType>
+    <properties>
+        <property name="min" type="any" group="Data">
+            <documentation>Sets the minimum possible value of the defined range.</documentation>
+        </property>
+        <property name="max" type="any" group="Data">
+            <documentation>Sets the maximum possible value of the defined range.</documentation>
+        </property>
+        <property name="step" type="any" defaultValue="1" group="Data">
+            <documentation>Increases/decreases the value of the input.</documentation>
+        </property>
+        <property name="largerStep" type="any" defaultValue="2" group="Data">
+            <documentation>TIncreases/decreases the value with a larger value than the set step only when using the PageUp/PageDown keys.
+Default value is 2 times larger than the set step.</documentation>
+        </property>
+        <property name="value" type="any" defaultValue="0" group="Data">
+            <documentation>Determines the value of the &lt;code&gt;StepInput&lt;/code&gt; and can be set initially from the app developer.</documentation>
+        </property>
+        <property name="width" type="sap.ui.core/CSSSize" group="Dimension">
+            <documentation>Defines the width of the control.</documentation>
+        </property>
+        <property name="valueState" type="sap.ui.core/ValueState" defaultValue="None" group="Data">
+            <documentation>Accepts the core enumeration ValueState.type that supports &lt;code&gt;None&lt;/code&gt;, &lt;code&gt;Error&lt;/code&gt;, &lt;code&gt;Warning&lt;/code&gt; and &lt;code&gt;Success&lt;/code&gt;.</documentation>
+        </property>
+        <property name="editable" type="sap.ui.core/boolean" defaultValue="true" group="Behavior">
+            <documentation>Defines whether the control can be modified by the user or not.
+&lt;b&gt;Note:&lt;/b&gt; A user can tab to the non-editable control, highlight it, and copy the text from it.</documentation>
+        </property>
+        <property name="enabled" type="sap.ui.core/boolean" defaultValue="true" group="Behavior">
+            <documentation>Indicates whether the user can interact with the control or not.
+&lt;b&gt;Note:&lt;/b&gt; Disabled controls cannot be focused and they are out of the tab-chain.</documentation>
+        </property>
+    </properties>
+    <events>
+        <event name="change" allowPreventDefault="false">
+            <documentation>Is fired when one of the following happens: &lt;br&gt;
+&lt;ol&gt;
+ &lt;li&gt;the text in the input has changed and the focus leaves the input field or the enter key
+ is pressed.&lt;/li&gt;
+ &lt;li&gt;One of the decrement or increment buttons is pressed&lt;/li&gt;
+&lt;/ol&gt;</documentation>
+            <parameters>
+                <parameter name="value" type="sap.ui.core/string">
+                    <documentation>The new &lt;code&gt;value&lt;/code&gt; of the &lt;code&gt;control&lt;/code&gt;.</documentation>
+                </parameter>
+            </parameters>
+        </event>
+    </events>
+    <aggregations>
+        <aggregation name="_incrementButton" type="sap.m/Button" cardinality="0..1" visibility="hidden">
+            <documentation>Internal aggregation that contains the &lt;code&gt;Button&lt;/code&gt; for incrementation.</documentation>
+        </aggregation>
+        <aggregation name="_decrementButton" type="sap.m/Button" cardinality="0..1" visibility="hidden">
+            <documentation>Internal aggregation that contains the &lt;code&gt;Button&lt;/code&gt; for decrementation.</documentation>
+        </aggregation>
+        <aggregation name="_input" type="sap.m/Input" cardinality="0..1" visibility="hidden">
+            <documentation>Internal aggregation that contains the &lt;code&gt;Input&lt;/code&gt;.</documentation>
+        </aggregation>
+    </aggregations>
+    <associations>
+        <association name="ariaLabelledBy" type="sap.ui.core/Control" cardinality="0..n">
+            <documentation>Association to controls / IDs that label this control (see WAI-ARIA attribute aria-labelledby).</documentation>
+        </association>
+        <association name="ariaDescribedBy" type="sap.ui.core/Control" cardinality="0..n">
+            <documentation>Association to controls / IDs which describe this control (see WAI-ARIA attribute aria-describedby).</documentation>
+        </association>
+    </associations>
+</control>

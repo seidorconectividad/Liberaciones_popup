@@ -1,0 +1,45 @@
+{
+  "run": [
+    {
+      "filePath": "/webapp/index.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [
+        {
+          "paramName": "sap-language",
+          "paramValue": "EN"
+        }
+      ],
+      "hashParameter": "",
+      "backendSystem": [],
+      "_metadata": {
+        "id": 1445530,
+        "runnerId": "webapprunner",
+        "displayName": "Run index.html",
+        "lastRunTimeStamp": 1499181101114
+      }
+    },
+    {
+      "filePath": "/webapp/test.html",
+      "previewMode": 1,
+      "dataMode": 0,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [],
+      "hashParameter": "",
+      "backendSystem": [],
+      "_metadata": {
+        "id": 519344,
+        "runnerId": "webapprunner",
+        "displayName": "Run test.html",
+        "lastRunTimeStamp": 1495037666397
+      }
+    }
+  ]
+}

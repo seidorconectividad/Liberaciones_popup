@@ -1,0 +1,28 @@
+/* Enter your custom styles here */
+
+sapMTile,
+.sapMTileContent {
+    width: 100% !important;
+}
+
+.sapMTile {
+    width: 44% !important;
+}
+
+.sapMDialogScroll,
+.sapMDialogScrollCont {
+    width: 100% !important;
+    height: 100% !important;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.sapUiUfdSpltContCntnt {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+.frame_app {
+    width: 100% !important;
+    height: 100% !important;
+}

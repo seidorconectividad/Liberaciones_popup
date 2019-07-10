@@ -1,0 +1,112 @@
+<mvc:View
+		controllerName="com.prodac.libsolped.masterdetail.controller.Master"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:core="sap.ui.core"
+		xmlns="sap.m"
+		xmlns:semantic="sap.m.semantic">
+
+	<semantic:MasterPage
+			id="page"
+			title="{masterView>/title}"
+			navButtonPress="onNavBackExit"	showNavButton="false">
+		<semantic:subHeader>
+			<Bar id="headerBar">
+				<contentMiddle>
+					<Button icon="sap-icon://navigation-right-arrow" press="" />
+					<SearchField
+							id="searchField"
+							showRefreshButton="{= !${device>/support/touch} }"
+							tooltip="{i18n>masterSearchTooltip}"
+							width="85%"
+							placeholder="Buscar"
+							search="onSearch">
+					</SearchField>
+				</contentMiddle>
+			</Bar>
+		</semantic:subHeader>
+
+		<semantic:content>
+			<PullToRefresh
+					id="pullToRefresh"
+					visible="{device>/support/touch}"
+					refresh="onRefresh" />
+			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
+			<List
+					id="list"
+					items="{
+						path: '/LibMM_Cabeceras',
+						sorter: {
+							path: 'NUMLIB',
+							descending: false
+							},
+						groupHeaderFactory: '.createGroupHeader'
+					}"
+					busyIndicatorDelay="{masterView>/delay}"
+					noDataText="{masterView>/noDataText}"
+					mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
+					growing="true"
+					growingScrollToLoad="true"
+					updateFinished="onUpdateFinished"
+					selectionChange="onSelectionChange">
+<!--
+						filters: [
+							{ path: 'APROBADO', operator: 'NE', value1: '1' },
+							{ path: 'GRUPO', operator: 'EQ', value1: '01' },
+							{ path: 'USUARIO', operator: 'EQ', value1: 'MARIO' }
+						],
+-->
+				<infoToolbar>
+					<Toolbar
+							active="true"
+							id="filterBar"
+							visible="{masterView>/isFilterBarVisible}"
+							press="onOpenViewSettings">
+						<Title
+								id="filterBarLabel"
+								text="{masterView>/filterBarLabel}" />
+					</Toolbar>
+				</infoToolbar>
+				<items>
+					<ObjectListItem
+							type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
+							press="onSelectionChange"
+							intro="{NUMLIB}"
+							title="{PROVEEDOR_NOM}"
+							number="{
+								parts: ['IMPORTE'], formatter: '.formatter.printMontoImporte'
+							}"
+							numberUnit="{MONEDA}"
+							>
+						<firstStatus>
+							<ObjectStatus text="{ path: 'FECHA', formatter: '.formatter.mostrarFechaSAP' }" />
+						</firstStatus>
+						<attributes>
+							<ObjectAttribute text= "" />
+							<ObjectAttribute text= "Area: {SOLICITANTE_AREA}" />
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</semantic:content>
+
+		<!--
+		<semantic:sort>
+			<semantic:SortSelect
+					id="sort"
+					selectedKey="{masterView>/sortBy}"
+					change="onSort">
+				<core:Item
+						id="masterSort1"
+						key="NUMLIB"
+						text="Número liberación"/>
+				<core:Item
+						id="masterSort2"
+						key="PROVEEDOR_NOM"
+						text="Proveedor"/>
+			</semantic:SortSelect>
+		</semantic:sort>
+		-->
+
+	</semantic:MasterPage>
+
+</mvc:View>

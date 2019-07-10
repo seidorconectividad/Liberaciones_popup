@@ -1,0 +1,24 @@
+{
+  "projectType": [
+    "sap.watt.uitools.ide.fiori",
+    "com.watt.common.builder.sapui5clientbuild"
+  ],
+  "build": {
+    "targetFolder": "dist",
+    "sourceFolder": "webapp",
+    "buildRequired": true,
+    "lastBuildDateTime": "Tue, 04 Jul 2017 03:52:51 GMT"
+  },
+  "mockpreview": {
+    "mockUri": "/destinations/Prodac/.xsodata/",
+    "metadataFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
+  },
+  "hcpdeploy": {
+    "account": "d53a8f764",
+    "name": "liberacionsolped",
+    "lastVersionWeTriedToDeploy": "1.0.27"
+  }
+}

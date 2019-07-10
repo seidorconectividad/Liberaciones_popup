@@ -1,0 +1,119 @@
+<mvc:View
+xmlns:core="sap.ui.core"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"
+xmlns:f="sap.ui.layout.form"
+xmlns:ui="sap.ui.table"
+xmlns:u="sap.ui.unified"
+controllerName="com.prodac.liberacion.notacreditoProdacLiberacionNotaCredito.controller.Detail"
+xmlns:html="http://www.w3.org/1999/xhtml">
+	<VBox>
+		<Panel class="sapUiNoMargin">
+			<content>
+				<!--
+				<ObjectHeader id="objectHeader" class="sapUiNoMargin sapUiNoPadding HeaderDetail"
+					title="No {path: 'dataSoapDetail>/DOC_NUMBER', formatter: '.formatter.removeZero'}" number="{dataSoapDetail>/IMPORTE_CURRENCY} {path: 'dataSoapDetail>/IMPORTE', formatter: '.formatter.currencyValue'}" numberUnit="Monto total (Sin IGV)">
+					<attributes>
+						<ObjectAttribute text= "Fecha: {parts: ['dataSoapDetail>/DOC_DATE', 'formatdate>/large', 'formatdate>/add'], formatter: '.formatter.date'}" />
+					</attributes>
+				</ObjectHeader>
+				-->
+				<!--
+				<f:SimpleForm maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" class="sapUiTinyMarginTop editableForm FormDetail"
+            		labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
+				-->
+
+				<f:SimpleForm maxContainerCols="2" editable="false" layout="ResponsiveGridLayout" class="editableForm"
+										adjustLabelSpan="false"
+										breakpointL="300"
+										breakpointM="300"
+										breakpointXL="300"
+										labelSpanL="6"
+								labelSpanM="6"
+								emptySpanL="0"
+								emptySpanM="0"
+								columnsL="1"
+								columnsM="1"
+									>
+
+	                <f:content>
+	                	<!-- <core:Title text="Detalle Cabecera" /> -->
+												<Label text="No nota crédito" />
+												<Text text="{path: 'dataSoapDetail>/DOC_NUMBER', formatter: '.formatter.removeZero'}" class="sapTextBlue" />
+												<Label text="Usuario Solicitante" />
+		                    <Text text="{dataSoapDetail>/SOLICITANTE}" />
+			                	<Label text="Concepto" />
+			                	<Text text="{dataSoapDetail>/MOTIVO}" class="sapTextRed" />
+												<Label text="Valor venta(s/IGV)" />
+			                	<Text text="{dataSoapDetail>/IMPORTE_CURRENCY} {path: 'dataSoapDetail>/IMPORTE', formatter: '.formatter.currencyValue'}" />
+		                    <Label text="Cliente"/>
+			                	<Text text="{path: 'dataSoapDetail>/SOLD_TO', formatter: '.formatter.removeZero'} {dataSoapDetail>/RAZON_SOCIAL}" />
+												<Label text="Último aprobador" />
+			                	<Text text="{dataSoapDetail>/ULTIMO_APROBADOR}" />
+												<Label text="Fecha" />
+			                	<Text text="{parts: ['dataSoapDetail>/DOC_DATE', 'formatdate>/large', 'formatdate>/add'], formatter: '.formatter.date'}" />
+										<core:Title text="Datos Adicionales" />
+												<Label text="Motivo SAP" />
+		                    <Text text="{dataSoapDetail>/MOTIVO_SAP}" />
+		                    <Label text="Referencia Factura" />
+		                    <Text text="{path: 'dataSoapDetail>/REF_DOC', formatter: '.formatter.removeZero'}" />
+		                    <Label text="Referencia SUNAT" />
+		                    <Text text="{dataSoapDetail>/REF_DOC_L}" />
+		                    <Label text="Doc. Contable" />
+		                    <Text text="{dataSoapDetail>/DOC_CONTABLE}" />
+					</f:content>
+	            </f:SimpleForm>
+			</content>
+		</Panel>
+		<Panel class="sapUiNoMargin">
+			<content>
+				<!--
+				<ui:Table id="ListArticle" rows="{dataSoapDetail>/ITEMS}" selectionMode="None" visibleRowCount="4">
+				-->
+				<ui:Table	id="ListArticle" rows="{dataSoapDetail>/ITEMS}" selectionMode="Single"	selectionBehavior="RowOnly"	enableColumnReordering="false"
+					 visibleRowCount="5">
+
+        			<ui:columns>
+						<ui:Column width="5%">
+							<Label text="Pos" />
+							<ui:template>
+								<Text text="{dataSoapDetail>ITM_NUMBER}"/>
+								<Text text="{path: 'dataSoapDetail>ITM_NUMBER', formatter: '.formatter.removeZero'}" />
+							</ui:template>
+						</ui:Column>
+						<ui:Column width="5rem">
+							<Label text="Código" />
+							<ui:template>
+								<Text text="{dataSoapDetail>MATERIAL}"/>
+							</ui:template>
+						</ui:Column>
+						<ui:Column width="12rem">
+							<Label text="Descripción" />
+							<ui:template>
+								<Text text="{dataSoapDetail>DESCRIPCION}"/>
+							</ui:template>
+						</ui:Column>
+						<ui:Column width="8%" hAlign="End">
+							<Label text="Cantidad" />
+							<ui:template>
+								<Text text="{path: 'dataSoapDetail>REQ_QTY', formatter: '.formatter.currencyValue'}" />
+							</ui:template>
+						</ui:Column>
+						<ui:Column width="5%" hAlign="End">
+							<Label text="UM" />
+							<ui:template>
+								<Text text="{dataSoapDetail>TARGET_QU}"/>
+							</ui:template>
+						</ui:Column>
+						<ui:Column width="7%" hAlign="End">
+							<Label text="Subtotal" />
+							<ui:template>
+								<Text text="{path: 'dataSoapDetail>NET_VALUE', formatter: '.formatter.currencyValue'}" />
+							</ui:template>
+						</ui:Column>
+					</ui:columns>
+				</ui:Table>
+			</content>
+		</Panel>
+	</VBox>
+</mvc:View>

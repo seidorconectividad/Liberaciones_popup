@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<control xmlns="http://www.sap.com/sap.ui.library.xsd">
+    <name>P13nSortPanel</name>
+    <derived/>
+    <documentation>The P13nSortPanel control is used to define settings for sorting in table personalization.</documentation>
+    <baseType>sap.m/P13nPanel</baseType>
+    <properties>
+        <property name="containerQuery" type="sap.ui.core/boolean" defaultValue="false" group="Misc" since="1.26">
+            <documentation>defines if the mediaQuery or a ContainerResize will be used for layout update. When the ConditionPanel is used on a dialog the
+property should be set to true!</documentation>
+        </property>
+        <property name="layoutMode" type="sap.ui.core/string" group="Misc" since="1.26">
+            <documentation>can be used to control the layout behavior. Default is "" which will automatically change the layout. With "Desktop", "Table"
+or"Phone" you can set a fixed layout.</documentation>
+        </property>
+    </properties>
+    <events>
+        <event name="addSortItem" since="1.26" allowPreventDefault="false">
+            <documentation>event raised when a SortItem was added</documentation>
+        </event>
+        <event name="removeSortItem" since="1.26" allowPreventDefault="false">
+            <documentation>remove a sort item</documentation>
+        </event>
+        <event name="updateSortItem" since="1.26" allowPreventDefault="false">
+            <documentation>update a sort item</documentation>
+        </event>
+    </events>
+    <aggregations>
+        <aggregation name="content" type="sap.ui.core/Control" cardinality="0..n" visibility="hidden">
+            <documentation>content for include and exclude panels</documentation>
+        </aggregation>
+        <aggregation name="sortItems" type="sap.m/P13nSortItem" since="1.26" cardinality="0..n" bindable="bindable">
+            <documentation>defined Sort Items</documentation>
+        </aggregation>
+    </aggregations>
+</control>

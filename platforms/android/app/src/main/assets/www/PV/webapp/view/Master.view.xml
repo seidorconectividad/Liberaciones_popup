@@ -1,0 +1,94 @@
+<mvc:View
+		controllerName="com.prodac.libpedven.masterdetail.controller.Master"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:core="sap.ui.core"
+		xmlns="sap.m"
+		xmlns:semantic="sap.m.semantic">
+
+	<semantic:MasterPage
+			id="page"
+			title="{masterView>/title}"
+			navButtonPress="onNavBackExit"	showNavButton="false">
+		<semantic:subHeader>
+			<Bar id="headerBar">
+				<contentMiddle>
+					<Button icon="sap-icon://navigation-right-arrow" press="" />
+					<SearchField
+							id="searchField"
+							showRefreshButton="{= !${device>/support/touch} }"
+							tooltip="{i18n>masterSearchTooltip}"
+							width="85%"
+							placeholder="Buscar"
+							search="onSearch">
+					</SearchField>
+				</contentMiddle>
+			</Bar>
+		</semantic:subHeader>
+
+		<semantic:content>
+			<PullToRefresh
+					id="pullToRefresh"
+					visible="{device>/support/touch}"
+					refresh="onRefresh" />
+			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
+			<List
+					id="list"
+					items="{
+						path: '/LibMM_Cabeceras',
+						sorter: {
+							path: 'NUMLIB',
+							descending: false
+							},
+						groupHeaderFactory: '.createGroupHeader'
+					}"
+					busyIndicatorDelay="{masterView>/delay}"
+					noDataText="{masterView>/noDataText}"
+					mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
+					growing="true"
+					growingScrollToLoad="true"
+					updateFinished="onUpdateFinished"
+					selectionChange="onSelectionChange">
+				<infoToolbar>
+					<Toolbar
+							active="true"
+							id="filterBar"
+							visible="{masterView>/isFilterBarVisible}"
+							press="onOpenViewSettings">
+						<Title
+								id="filterBarLabel"
+								text="{masterView>/filterBarLabel}" />
+					</Toolbar>
+				</infoToolbar>
+				<items>
+					<ObjectListItem
+							type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
+							press="onSelectionChange"
+							intro="{NUMLIB}"
+							title="{SOLICITANTE_USER}"
+							number="{
+								parts: ['IMPORTE'], formatter: '.formatter.printMontoImporte'
+							}"
+							numberUnit="{MONEDA}"
+							>
+					<attributes>
+						<ObjectAttribute text=" " />
+						<ObjectAttribute text="Vendedor: {PROVEEDOR_NOM}" />
+					</attributes>
+						<firstStatus>
+							<ObjectStatus text="{ path: 'FECHA', formatter: '.formatter.mostrarFechaSAP' }" />
+						</firstStatus>
+						<!--
+						<attributes>
+							<ObjectAttribute text= "" />
+							<ObjectAttribute text= "Area: {SOLICITANTE_AREA}" />
+						</attributes>
+						-->
+					</ObjectListItem>
+				</items>
+			</List>
+		</semantic:content>
+
+
+	</semantic:MasterPage>
+
+</mvc:View>

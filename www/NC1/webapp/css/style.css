@@ -1,0 +1,37 @@
+/* Enter your custom styles here */
+.sapUiNoPadding {
+	padding:0 !important;
+}
+.FormPanel .sapUiFormTitle {
+	display:none;
+}
+.sapTextRed {
+	color:red;
+}
+.FormDetail .sapUiFormTitle {
+	font-size: 1.175rem;
+}
+.FormDetail .sapUiFormElementLbl {
+	padding-top: 0 !important;
+}
+.FormDetail .sapUiSelectable {
+	min-height: 1.3rem;
+    line-height: normal;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.HeaderDetail .sapMOHBottomRow {
+	margin-top: 0;
+}
+.hide {
+	display:none;
+}
+
+
+.sapTextBlue {
+     color: Blue;
+}
+
+#__component0---detail--objectHeader {
+	padding:0px !important;
+}

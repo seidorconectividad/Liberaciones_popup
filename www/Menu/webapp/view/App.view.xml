@@ -1,0 +1,59 @@
+<mvc:View controllerName="appmenuliberaciones.controller.App"
+	xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" displayBlock="false">
+	<Dialog showHeader="false" id="dlg_liberacion_solped" stretch="true" contentWidth="100%" contentHeight="100%">
+		<content>
+			<u:Shell icon="{/logo}" tooltip="Marinasol">
+				<u:user>
+					<u:ShellHeadUserItem id="shellUsuario2" press="mostrarusuario" image="sap-icon://person-placeholder" showPopupIndicator="false" username=""/>
+				</u:user>
+				<u:headItems>
+					<u:ShellHeadItem icon="sap-icon://log" tooltip="Cerrar session" selected="false" press="onLogoutDialog"/>
+				</u:headItems>
+				<u:headEndItems>
+					<u:ShellHeadItem icon="sap-icon://home" tooltip="Ir al menu" selected="false" press="goHome"/>
+				</u:headEndItems>
+				<u:content>
+					<core:HTML id="frame"></core:HTML>
+				</u:content>
+			</u:Shell>
+		</content>
+	</Dialog>
+	<Dialog title="Usuario" stretch="false" id="dlgusuario">
+		<content>
+			<FlexBox height="200px" alignItems="Center" justifyContent="Center">
+				<items>
+					<Text text="" id="txtusuario" />
+				</items>
+			</FlexBox>
+		</content>
+		<!-- cambio ondemand -->
+		<beginButton>
+			<Button text="Sincronizar" icon="sap-icon://refresh" press="goRefreshUsuario"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cerrar" icon="sap-icon://sys-cancel" press="goCerrarDialogUsuario"/>
+		</endButton>
+	</Dialog>
+	<u:Shell icon="{/logo}" tooltip="Marinasol" id="myShell">
+		<u:user>
+			<u:ShellHeadUserItem id="shellUsuario" press="mostrarusuario" image="sap-icon://person-placeholder" showPopupIndicator="false" username=""/>
+		</u:user>
+		<u:headItems>
+			<u:ShellHeadItem icon="sap-icon://log" tooltip="Cerrar session" selected="false" press="onLogoutDialog"/>
+		</u:headItems>
+		<u:content>
+			<ScrollContainer height="100%"	width="100%" horizontal="true" vertical="true" >
+			<!--TileContainer-->
+			<StandardTile id="tile_sp" icon="{icon}" number="0" press="goSolpeds" title="Liberación de SOLPED"/>
+			<StandardTile id="tile_oc" icon="{icon}" number="0" press="goOC" title="Liberación OC"/>
+			<StandardTile id="tile_pv" icon="{icon}" number="0" press="goPV" title="Liberación pedido de ventas"/>
+			<StandardTile id="tile_nc" icon="{icon}" number="0" press="goNC" title="Liberación de Sol.NC"/>
+			<!--/TileContainer-->
+			</ScrollContainer>
+		</u:content>
+	</u:Shell>
+</mvc:View>
